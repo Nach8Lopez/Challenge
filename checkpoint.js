@@ -9,7 +9,7 @@ function minutosASegundos(minutos) {
   // minutosASegundos(5) => 300
   // minutosASegundos(3) => 180
   // Tu código aca:
-
+  return minutos * 60
 }
 
 function promedio(array) {
@@ -21,7 +21,11 @@ function promedio(array) {
   // Nota: Los numeros estan ordenados de menor a mayor.
 
   // Tu código aca:
-
+  let suma = 0
+  for (let i = 0; i < array.length; i++) {
+    suma += array[i] / array.length
+  }
+  return suma
 }
 
 function salarioAnual(empleados, nombre) {
@@ -45,7 +49,8 @@ function salarioAnual(empleados, nombre) {
   // salarioAnual(empleados, 'Flor'); => 48000
   // salarioAnual(empleados, 'Manuel;); => 12000
   // Tu código aca:
-
+  let empleado = empleados.filter(empleado => empleado.nombre === nombre)
+  return empleado[0].salario * 12;
 }
 
 function encontrarLaPalabra(string) {
@@ -56,7 +61,12 @@ function encontrarLaPalabra(string) {
   // encontrarLaBomba('hola que tal, como va?!') => false;
 
   // Tu código:
-
+  let index = string.indexOf("henry")
+  if(index >= 0) {
+    return true
+  } else {
+    return false
+  }
 }
 
 function index() {
@@ -73,7 +83,12 @@ function index() {
   // numeros.encontraIndex(23) debe devolver -1 ya que ese elemento no existe en ese array.
 
   // Tu código aca:
-
+  const i = array.find(i => i.array === index)
+  if(i == true) {
+    return index
+  } else {
+    return -1
+  }
 };
 
 
@@ -84,23 +99,31 @@ function crearClaseEmpleado() {
   // nombre (string) , salario (integer) , tareas (array de objetos), jefe (booleano - por defecto false) 
 
   class Empleado {
-    constructor() {
-
+    constructor(nombre = " ", salario = 0, tareas = [], jefe = false) {
+      this.nombre = nombre;
+      this.salario = salario;
+      this.tareas = tareas;
+      this.jefe = jefe;
     }
 
     addTarea(tarea, prioridad) {
       // el metodo addTarea recibe un string tarea y un entero prioridad y debe agregar un objeto:
       // { tarea: tarea, prioridad: prioridad} al arreglo de tareas del empleado.
       // no debe retornar nada.
-      
+      const a = {
+        tarea: tarea,
+        prioridad: prioridad
+      }
+      this.tareas.push(a)
     }
 
     switchJefe() {
       // este método debe switchear el booleano jefe, si estaba en true, dejarlo en false
       // y si estaba en false, dejarlo en true
       // no debe retornar nada.
-      
+      this.jefe =! this.jefe
     }
+
     getTareas() {
       // Escribe una función que retorne un arreglo con sólo los nombres (tarea) del arreglo de tareas
       // del empleado.
@@ -111,7 +134,10 @@ function crearClaseEmpleado() {
       //  ];
       // Ej:
       // persona.getTareas() // retorna ['compras', 'dar clases', 'operaciones']
-      
+      const t = this.tareas.filter(t => t.tarea === this.tarea)
+      return t 
+      // Segun el test, cumplo con la función pero me sale un array que produce el error, no sé si tuve un error
+      // yo o es fallo del test.
     }
 
     getTareasPrioritarias(prioridad) {
@@ -131,7 +157,9 @@ function crearClaseEmpleado() {
       //  nombre: 'compras',
       //  prioridad: 4,
       // }]
-      
+      const p = this.tareas.filter(p => p.prioridad > this.tareas.length)
+      return p
+
     }
 
   };
